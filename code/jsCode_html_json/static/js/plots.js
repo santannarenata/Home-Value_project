@@ -15,7 +15,7 @@ function buildMetadata(county_select) {
     var Cannon = data.Cannon;
     var Trousdale = data.Trousdale;
     var date = data.date;
-  
+    
     var AllHomes = [{id:"Davidson", AllHomes: Davidson},
     {id:"Williamson", AllHomes: Williamson},
     {id:"Rutherford", AllHomes: Rutherford},
@@ -31,60 +31,184 @@ function buildMetadata(county_select) {
     {id:"Cannon", AllHomes: Cannon},
     {id:"Trousdale", AllHomes: Trousdale}
     ];
+
     //console.log(AllHomes);
     // Filter the data for the object with the desired county
     var resultArray = AllHomes.filter(sampleObj => sampleObj.id == county_select);
     var result = resultArray[0];
+    var county_allhomes_g = [];
     var county_allhomes = [];
     var county_date = [];
     for (var i = 0; i < 51; ++i) {
+      county_allhomes_g.push(100*(result.AllHomes[i] - result.AllHomes[i-12])/result.AllHomes[i-12]);
       county_allhomes.push(result.AllHomes[i]);
       county_date.push(date[i]);
     };
-    //console.log(resultArray);
-    var trace1 = {
+    
+    // // Plot for growth
+    // var plot_homes_g = {
+    //   type: "scatter",
+    //   mode: "lines",
+    //   x: county_date,
+    //   y: county_allhomes_g,
+    //   line: {
+    //     color: "blue"
+    //   }
+    // };
+
+    // var layout_g = {
+    //   title: `All Homes`,
+    //   xaxis: {
+    //     autorange: true,
+    //     type: "date",
+    //     title: 'Timeline',
+    //     titlefont: {
+    //       family: 'Arial, sans-serif',
+    //       size: 18,
+    //       color: 'grey'
+    //     }
+    //   },
+    //   yaxis: {
+    //     //rangemode: 'nonnegative',
+    //     type: "linear",
+    //     range: [-5, 17],
+    //     //autorange: true,
+    //     title: 'House Value',
+    //     titlefont: {
+    //       family: 'Arial, sans-serif',
+    //       size: 18,
+    //       color: 'grey'
+    //     }
+    //   }
+      
+    // };
+    
+    // var plot_homes_g = [plot_homes_g];
+
+    // Plotly.newPlot("growth", plot_homes_g, layout_g);
+
+
+    // // PLot for levels
+
+    // var plot_homes_l = {
+    //   type: "scatter",
+    //   mode: "lines",
+    //   x: county_date,
+    //   y: county_allhomes,
+    //   yaxis: 'y2',
+    //   line: {
+    //     color: "blue"
+    //   }
+    // };
+    // var layout_l = {
+    //   title: `All Homes`,
+    //   xaxis: {
+    //     autorange: true,
+    //     type: "date",
+    //     title: 'Timeline',
+    //     titlefont: {
+    //       family: 'Arial, sans-serif',
+    //       size: 18,
+    //       color: 'grey'
+    //     }
+    //   },
+    //   yaxis2: {
+    //     //rangemode: 'nonnegative',
+    //     type: "linear",
+    //     range: [85000, 550000],
+    //     //autorange: true,
+    //     title: 'House Value',
+    //     titlefont: {
+    //       family: 'Arial, sans-serif',
+    //       size: 18,
+    //       color: 'grey'
+    //     }
+    //   }
+      
+    // };
+    // var plot_homes_l = [plot_homes_l];
+    // Plotly.newPlot("level", plot_homes_l, layout_l);
+
+
+    // Try to combine both plots
+    var plot_homes_g1 = {
+      x: county_date,
+      y: county_allhomes_g,
+      yaxis: 'y',
+      xaxis: "x",
+      name: 'House value yearly growth (%)',
       type: "scatter",
       mode: "lines",
-      x: county_date,
-      y: county_allhomes,
-    
-      line: {
-        color: "blue"
-      }
+      orientation: "h"
     };
 
-    var data = [trace1];
+    var plot_homes_l1 = {
+      x: county_date,
+      y: county_allhomes,
+      yaxis: 'y2',
+      xaxis: "x",
+      name: 'House value ($)',
+      type: "scatter",
+      mode: "lines",
+      orientation: "h"
+
+    };
 
 
-    var layout = {
-      title: `All Homes`,
+
+
+    var plot_homes_both = [plot_homes_g1, plot_homes_l1];
+
+    var layout_both = {
+      autosize: false,
+      width: 1000,
+      height: 650,
+      hovermode: "x unified",
+      yaxis: {
+        domain: [0.52, 1],
+        type: "linear",
+        anchor: 'x',
+        range: [-5, 17],
+        //autorange: true,
+        title: 'House Price yearly growth (%)',
+        titlefont: {
+          family: 'Arial, sans-serif',
+          size: 14,
+          color: 'grey'}
+      },
+      legend: {traceorder: 'reversed'},
+      yaxis2: {
+        domain: [0, 0.48],
+        type: "linear",
+        anchor: 'x',
+        range: [85000, 550000],
+        //autorange: true,
+        title: 'House Value ($)',
+        titlefont: {
+          family: 'Arial, sans-serif',
+          size: 14,
+          color: 'grey'
+        }
+      },
       xaxis: {
         autorange: true,
         type: "date",
         title: 'Timeline',
+        anchor: 'y2',
         titlefont: {
           family: 'Arial, sans-serif',
           size: 18,
           color: 'grey'
-        }
-      },
-      yaxis: {
-        rangemode: 'nonnegative',
-        zeroline: true,
-        autorange: true,
-        type: "linear",
-        title: 'House Value',
-        titlefont: {
-          family: 'Arial, sans-serif',
-          size: 18,
-          color: 'grey'
+          
         }
       }
-      
-    };
     
+    };
+    Plotly.newPlot("both", plot_homes_both, layout_both);
+    console.log(plot_homes_both)
 
-    Plotly.newPlot("bar", data, layout);
+
+
 
   
   });

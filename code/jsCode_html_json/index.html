@@ -12,7 +12,7 @@
 
 <body>
 
-  <div class="container-fluid">
+  <div class="container4-fluid">
     <div class="row">
       <div class="col-md-12 jumbotron text-center">
         <h1>Home Value Dashboard</h1>
@@ -27,9 +27,9 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-md-2">
-        <div class="well">
-          <h5>Choose a County:</h5>
+      <div class="col-md-12  text-center">
+        <div class="well text-center">
+          <h3>Choose a County:</h3>
           <select id="selCounty" onchange="optionChanged(this.value)">
             <option value="Davidson">Davidson</option>
             <option value="Williamson">Williamson</option>
@@ -49,21 +49,24 @@
             <option value="Cannon">Cannon</option>
             <option value="Trousdale">Trousdale</option>
           </select>
-          
-          
         </div>
+      </div>
+    </div>
+    <!-- <div class="row">
+      <div class="col-md-6">
+        <div id="level"></div>
+      </div>
+      <div class="col-md-6">
+        <div id="growth"></div>
+      </div>
+    </div>
+    <br> -->
+    <div class="row"></div>
+      <div class="col-md-12" align="center">
+        <div id="both" align="center"></div>
+      </div>
+    </div>
 
-      </div>
-      <div class="col-md-12">
-        <div id="bar"></div>
-      </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12">
-        <div id="bubble"></div>
-      </div>
-    </div>
   </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
