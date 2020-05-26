@@ -8,7 +8,7 @@
 
 2. Use Machine Learning in the context of technologies learned.
 
-3.You must use: Scikit-Learn and/or another machine learning library.
+3. You must use: Scikit-Learn and/or another machine learning library.
 
 4. You must use at least two of the below:
 
