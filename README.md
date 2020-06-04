@@ -4,7 +4,7 @@
 
 **Goal**
 A time series analysis of the evolution of house values in different counties in TN. 
-Counties Analyzed (14):Davidson, Rutherford, Williamson, Sumner, Wilson, Maury, Robertson, Dickson, Cheatham, Hickman Macon, Smith, Cannon and Trousdale. 
+Counties Analyzed (14): Davidson, Rutherford, Williamson, Sumner, Wilson, Maury, Robertson, Dickson, Cheatham, Hickman, Macon, Smith, Cannon and Trousdale. 
 
 -Tools: JavaScript, CSS and HTML
 
